@@ -1,0 +1,45 @@
+Event Binding
+
+import React, { Component } from 'react'
+
+class Greet extends Component {
+  constructor(props)
+  {
+     super(props)
+     this.state = { greeting : 'Unknown', name : 'Unknown'};
+  }
+  clickHandler() {
+     console.log("Button is clicked");
+     this.setState({
+      greeting : 'Vanakkam', //this.props.greeting,
+      name : 'Varshini' //this.props.name
+     })
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.clickHandler}>Click</button>
+        <div>{this.state.greeting} {this.state.name}</div>
+      </div>
+    )
+  }
+}
+
+uncaught TypeError: Cannot read properties of undefined (reading 'setState')
+Approach - 1
+<button onClick={this.clickHandler.bind(this)}>Click</button>
+Approach – 2
+<button onClick={() => this.clickHandler()}>Click</button>
+Approach – 3
+Binding in constructer
+this.clickHandler = this.clickHandler.bind(this);
+Approach – 4
+Use arrow function as class property basically change the way we call the method in the class
+  clickHandler = () => {
+     console.log("Button is clicked");
+     this.setState({
+      greeting : 'Vanakkam', //this.props.greeting,
+      name : 'Varshini' //this.props.name
+     })
+  }
+

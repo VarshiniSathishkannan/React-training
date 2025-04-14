@@ -1,0 +1,119 @@
+useEffect hook
+For Sideeffects in functional components
+This is a replacement for the below lifecycle methods
+componentDidMount()
+componentDidUpdate()
+componentWillUnmount()
+Implementation using Class component
+
+import React, { Component } from 'react'
+
+export class ComponentC extends Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       count: 0
+    }
+  }
+
+  componentDidMount(){
+    document.title =`u clicked ${this.state.count} times`;
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    document.title =`u clicked ${this.state.count} times`;
+  }
+
+  componentWillUnmount(){
+    document.title = `u clicked 0 times`;
+  }
+
+  increment = () => {
+      this.setState(prev => {
+        return(
+          {
+            count : prev.count + 1
+          }
+        )
+      })
+  }
+
+  render() {
+    return (
+      <div>
+        <button onClick={this.increment}>Click {this.state.count}</button>
+      </div>
+    )
+  }
+}
+
+export default ComponentC
+
+useEffect hook will accept a function as a parameter which gets executed after every render of the component
+import React from 'react'
+
+export default function EffectHook() {
+  const [count, setCount] = React.useState(0);
+
+  React.useEffect(() =>
+    {document.title = `u clicked ${count} times`}
+  )
+  return (
+    <div>
+    <button onClick={() => setCount(prev => prev+1)}>Increment count {count}</button>
+    </div>
+  )
+}
+
+Here it will execute on the first render and every render after that, This is a replacement for componentDidMount and componentDidUpdate
+Conditional update
+
+  componentDidUpdate(prevProps, prevState){
+    if(prevState.count !== this.state.count)
+        console.log(`Updating Document title`);
+    document.title =`u clicked ${this.state.count} times`;
+  }
+
+For useEffect, we can mention it in the dependency array 
+  React.useEffect(() =>
+    {
+      console.log('Useeffect');
+      document.title = `u clicked ${count} times`
+    }, [count]
+  )
+
+If we have more than one state, then this method works, if we only one state then it may throw error for that
+Mimic only componentDidMount with useEffect by specifying a empty array [] as dependency
+
+Mimic componentWillUnmount with useEffect by using a return statement
+useEffect must not return anything besides a function, which is used for clean-up. You returned: u clicked 0 times
+We must return a cleanup function not any statement
+  React.useEffect(() =>
+    {
+      console.log('Useeffect');
+      document.title = `u clicked ${count} times`
+      return() => document.title = `u clicked 0 times`
+  
+    }, [count]
+  )
+
+And also 
+  React.useEffect( () => {
+    setTimeout(() => {
+        setCount((prev) => prev+1)
+    }, 1000)},[]
+  )
+
+This code will not work properly as expected, In class component if we declare the setTimeout in the componentDidMount then it works as expected, but in useEffect if we are using the similar approach by passing empty array as dependency then the count will not increase every minute, we have to add count as the dependency here, 
+  React.useEffect( () => {
+    setTimeout(() => {
+        setCount((prev) => prev+1)
+    }, 1000)},[count]
+  )
+
+And it is also a best practice to define the entire function inside the useEffect instead of just calling the function inside, as it will be easier to track the dependencies and mention the same in the dependency array
+Advantage of useEffect to lifecycle methods :
+
+With lifecycle methods, unrelated code are put together and related code are separated which was resolved by using hooks
+We can define multipe useEffect hooks in a single component 

@@ -1,0 +1,2 @@
+CDN -- Content Delivery Network
+To make use of the modules and packages without getting it installed, We can directly mention the URL where some Orgs be providing the content required and we can use it directly in our code

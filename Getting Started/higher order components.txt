@@ -1,0 +1,68 @@
+Higher Order Components
+To share common functionality between components 
+A pattern where a function takes a component as an argument and returns a new component 
+Const newcomponent = func( originalcomponent )
+Here newcomponent is the enhanced component where the func adds some data or extra functionality to it
+HOC is implemented in the below code snippet 
+import React from 'react'
+
+const updatedComponent = OriginalComponent => {
+    class NewComponent extends React.Component {
+        constructor(props)
+        {
+            super(props)
+            this.state = {
+                hover:0
+            }
+        }
+    
+        handleHover = () => {
+            this.setState(
+                (prev) => {
+                   return{
+                    hover : prev.hover + 1
+                   }
+                }
+            )
+        }
+        render()
+        {
+            console.log('first')
+            return (<OriginalComponent count={this.state.hover} handle={this.handleHover}></OriginalComponent>
+            )
+        }
+    }
+    return NewComponent
+}
+
+export default updatedComponent;
+
+
+The components which are sharing the functionality through HOC
+import React, { Component } from 'react'
+import updatedComponent from './countH'
+
+class HoverCounter extends Component {
+  render() {
+    return (
+      <div onMouseOver={this.props.handle}>HoverCounter {this.props.count}</div>
+    )
+  }
+}
+
+export default updatedComponent(HoverCounter)
+
+import React, { Component } from 'react'
+import updatedComponent from './countH'
+
+export class ClickCounter extends Component {
+  render() {
+    return (
+      <div>
+        <button onClick={this.props.handle}>Clicked {this.props.count} times</button>
+      </div>
+    )
+  }
+}
+
+export default updatedComponent(ClickCounter)

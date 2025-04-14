@@ -1,0 +1,38 @@
+Props 
+-- short for property
+-- data coming from the parent
+-- Immutable data of the component – they are read only, if we try to change the value, it throws an error
+
+Parent child communication
+-- props will be passed as an object from parent to child
+-- we can also pass some text between the opening and closing tags which will be available in children props
+<ContactUs> this is children </ContactUs>
+
+import React from 'react'
+
+const ContactUs = (props) => {
+return (
+    <div> 
+        <h1> {props.children} </h1> 
+        <h2> Called through arrow function </h2>
+    </div>
+);
+}
+
+export default ContactUs;
+
+Child parent communication
+We can pass data to parent through methods,
+A method is passed as a props from parent to child. That method can be invoked in the child and we can also pass parameters to it.
+The method defn will be in the parent but invoked from child
+Parent :
+  Converse(name)
+  {
+    alert(`Nothing much ${name}`);
+  }
+
+
+Child :
+<button onClick={() => {this.props.converse('Varshini')}}> What's new </button>
+
+

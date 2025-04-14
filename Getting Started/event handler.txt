@@ -1,0 +1,9 @@
+Event handler
+React events are named as camel case – onClick
+In plain html and vanilla JS we specify -- onclick
+In JSX we have to specify the function names inside curly braces, (interpolation)
+onClick = {clickHandler}
+if we give paranthesis, then it becomes a function call and it gets called everytime render is called which is not something we want
+So, we always have to give the function name without paranthesis for event handlers. We have to just replace the function in the onClick = {() => {}} so only variable has to be passed. The function is treated as a variable
+Incase of Class component we use, this.clickHandler
+Inside the class, methods are defined which are used as event handlers. 

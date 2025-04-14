@@ -1,0 +1,32 @@
+JSX
+JSX – JavaScript XML – Extension to the Javascript language syntax
+
+Write XML like code for elements and components 
+It is not a necessity to write in JSX for react applications
+But it makes our code simpler and elegant
+JSX tags will have attributes, tagname and children just like HTML hence it will be easier to adopt to it then plan JS
+Ultimately JSX will be transpiled (Translation and compilation ) (Done by Babel) to JS which will be understood by the browser
+That is why we import React from ‘react’ even though we don’t explicitly use it, because babel will convert the JSX into JS code - React.createelement() internally 
+We cannot use if else inside the JSX code. 
+
+JSX differences from HTML
+
+Class – className
+For – htmlFor
+camelCase property naming convention
+onclick – onClick
+tabindex – tabIndex
+
+JSX vs HTML
+JSX 
+-- No loops allowed 
+-- No if else
+-- No switch
+Have to use loops but not explicitly -- map 
+Dynamically rendered -- Rendered the jsx
+In html
+ <input type="button" value="Details" onclick="detailsEventHandler();" />
+In JSX
+synthetic events : wrapper around the normal html event
+ <input type="button" value="Details" onClick={this.detailsEventHandler} />
+detailsEventHandler -- has to written in the same component class outside the render function

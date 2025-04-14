@@ -1,0 +1,94 @@
+What are Portals in React?
+A Portal allows you to render a child component into a DOM node that exists outside the parent component’s DOM hierarchy.
+
+Simply put:
+Portals let you render React elements outside of the root div — while still keeping all React functionality (events, state, etc.) intact.
+
+🧠 Why use Portals?
+For UI elements that should visually break out of their container:
+
+✅ Modals
+
+✅ Tooltips
+
+✅ Dropdowns
+
+✅ Toast notifications
+
+Helps avoid CSS issues like overflow: hidden, z-index, or stacking context problems.
+
+🏗️ How to Use a Portal in React
+1. Create a DOM node outside of your root element (usually in public/index.html):
+html
+Copy
+Edit
+<!-- index.html -->
+<div id="root"></div>
+<div id="modal-root"></div> <!-- 👈 For portal content -->
+2. Use ReactDOM.createPortal() to render into it:
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+function Modal({ children }) {
+  return ReactDOM.createPortal(
+    <div className="modal">
+      {children}
+    </div>,
+    document.getElementById('modal-root') // 👈 Target DOM node
+  );
+}
+3. Use it in your component:
+
+function App() {
+  return (
+    <div>
+      <h1>Welcome!</h1>
+      <Modal>
+        <p>This is a modal rendered via Portal!</p>
+      </Modal>
+    </div>
+  );
+}
+Even though <Modal> is inside <App>, the actual rendered output appears outside of the main app root — in #modal-root.
+
+🧩 How It Works
+React maintains the React tree structure (for events, state, context, etc.).
+
+But renders the actual DOM node elsewhere — detached from its logical parent.
+
+It behaves just like any normal component otherwise!
+
+✅ Advantages
+Benefit	Explanation
+Better layout control	Avoid z-index or overflow issues
+Event bubbling	Events still bubble through the React tree
+Keeps app structure clean	Code stays logical even if DOM isn't
+⚠️ Common Use Case Example – Modal
+
+function ConfirmDialog({ onClose }) {
+  return ReactDOM.createPortal(
+    <div className="overlay">
+      <div className="dialog">
+        <p>Are you sure?</p>
+        <button onClick={onClose}>Close</button>
+      </div>
+    </div>,
+    document.getElementById("modal-root")
+  );
+}
+TL;DR
+React Portals let you render a component outside the main DOM tree, while still being part of the React tree.
+
+📍 Use it for:
+
+Modals
+
+Tooltips
+
+Popups
+
+Dropdowns
+
+🧠 They solve visual layout problems, while keeping all React logic intact.
+

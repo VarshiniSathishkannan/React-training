@@ -1,0 +1,16 @@
+When a component is being removed from the DOM
+
+componentWillUnmount
+method is invoked immediately before a component is unmounted or destroyed
+cancelling any network requests, removing event handlers, cancelling any subscriptions and also invalidating timers
+do not call setstate
+
+componentWillUnmount
+-- Called only once during the entire lifecycle
+-- Called when the component is unmounted
+-- cleaning up ; stop timer; unsubscribe the third party subscriptions; disconnect from the server
+-- Can i call setState -- no usage
+
+Can i call the setState in constructor -- no usage
+Can i call the setState in getDerivedStateFromProps -- Not possible
+Can i call the setState in render -- Yes but it will lead to infinite cycle and project will crash

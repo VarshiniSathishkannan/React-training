@@ -1,0 +1,55 @@
+⚛️ What is a Pure Component in React?
+A Pure Component in React is a component that only re-renders when its props or state actually change.
+
+It provides an automatic performance optimization by doing a shallow comparison of props and state in shouldComponentUpdate.
+
+🧠 In Simple Terms:
+A Pure Component avoids unnecessary re-renders by checking if the input (props/state) is the same as before.
+If nothing changed, React skips rendering the component again.
+
+🧱 How to Use It
+👉 For Class Components:
+Use React.PureComponent instead of React.Component.
+
+import React, { PureComponent } from 'react';
+
+class MyComponent extends PureComponent {
+  render() {
+    console.log("Rendering...");
+    return <h1>{this.props.name}</h1>;
+  }
+}
+If props.name stays the same, this component won’t re-render.
+
+👉 For Function Components:
+Use React.memo() to wrap your functional component.
+
+
+const MyComponent = React.memo(function MyComponent(props) {
+  console.log("Rendering...");
+  return <h1>{props.name}</h1>;
+});
+Same deal — it only re-renders when props change (shallow comparison).
+
+⚡ Why Use Pure Components?
+✅ Improves performance
+✅ Reduces unnecessary rendering
+✅ Useful in large component trees
+
+❗Important: Shallow Comparison
+Pure components use shallow comparison, meaning:
+
+For primitive values (string, number, boolean), it checks by value.
+
+For objects/arrays, it checks by reference (not deep equality).
+
+
+{ name: "Alex" } === { name: "Alex" } // false (different references)
+So if you pass new objects or arrays, even with the same content, it will re-render.
+
+🧠 TL;DR:
+Feature	Pure Component
+Type	Class (React.PureComponent) or Functional (React.memo)
+Behavior	Avoids re-render if props/state haven’t changed
+Comparison Type	Shallow (not deep)
+Use case	Performance optimization

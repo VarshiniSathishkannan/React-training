@@ -1,0 +1,32 @@
+List Rendering
+render() {
+        return (
+            <div>{this.myfriends.map(frnd => <h1>{frnd}</h1>)}</div>
+        )
+    }
+
+Warning: Each child in a list should have a unique "key" prop.
+
+This warning can be resolved, if we pass a (attribute) key which holds the unique value of the list in the map function. This cannot be passed to the child as a props. It is just a props passed to the map function to render the list efficiently. That value cannot be used anywhere
+myfriends = ['Santhiya', 'Janani', 'Julfiya'];
+    render() {
+        return (
+            <div>{this.myfriends.map(frnd => <h1 key={frnd}>{frnd}</h1>)}</div>
+        )
+    }
+
+If we have duplicates in the array, then we can add index as the second parameter to the map function and pass that as the key
+myfriends = ['Santhiya', 'Janani', 'Julfiya','Santhiya'];
+    render() {
+        return (
+            <div>{this.myfriends.map((frnd,index) => <h1 key={index}>{frnd}</h1>)}</div>
+        )
+    }
+
+But we face some problems while we are using the index as key. It gets messed up if we trying to sort or filter or reordered
+
+When to Use Index as a Key:
+
+When items in our list do not have a unique ID
+The List is a static list and does not change
+The list  will never be reordered or filtered

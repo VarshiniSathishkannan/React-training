@@ -1,0 +1,83 @@
+Styling React Components:
+
+There are 4 approaches which we can follow,
+
+Inline Styling
+<div>
+          <p
+            style={{
+              lineHeight: 1.5,
+              fontWeight: 300,
+              marginBottom: "25px",
+              fontSize: "1.375rem"
+            }}
+          >
+            This is one of the best developer blogs on the planet! I read it daily to improve my skills.
+          </p>
+        </div>
+
+CSS Stylesheet
+
+Greet.css
+.button {
+    color:aqua
+}
+
+
+<button className='button' onClick={this.clickHandler}>Click</button>
+
+button {
+    color:aqua
+}
+
+
+This will apply to all the buttons in the component where it was imported and as well as to the child components Plus, it's important to note that since CSS cascades to all children elements, if you apply a CSS stylesheet to a component it is not just scoped to that component. All its declared rules will be transferred to any elements that are children of your styled component.
+
+CSS Modules
+/* src/styles.module.css */
+
+body {
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 1.5;
+  line-height: 1.5;
+  color: #292b2c;
+  background-color: #fff;
+}
+
+/* styles skipped */
+
+.testimonial-name span {
+  font-weight: 400;
+}
+
+import styles from './styles.module.css';
+
+export default function App() {
+  return (
+    <section className={styles.testimonial}>
+      <div className={styles['testimonial-wrapper']}>
+        <img
+          src="https://randomuser.me/api/portraits/women/48.jpg"
+          alt="Tammy Stevens"
+          className={styles['testimonial-avatar']}
+        />
+        <div>
+          <p className={styles['testimonial-quote']}>
+            This is one of the best developer blogs on the planet! I read it
+            daily to improve my skills.
+          </p>
+        </div>
+        <p className={styles['testimonial-name']}>
+          Tammy Stevens
+          <span> · Front End Developer</span>
+        </p>
+      </div>
+    </section>
+  );
+}
+
+Our CSS file has the name .module in it before the extension .css. Any CSS module file must have the name "module" in it and end in the appropriate extension
+What is interesting to note if we look at the code above is that CSS modules are written just like normal CSS, but are imported and used as if it were created as objects (inline styles).
+Plus, CSS modules solve the problem of global scope in CSS. As compared to our normal CSS stylesheets, CSS declared using modules to individual components will not cascade to child components.

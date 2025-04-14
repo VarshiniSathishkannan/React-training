@@ -1,0 +1,57 @@
+Mounting
+When an instance of the component is being created and inserted into DOM. There are 4 methods
+
+Constructor
+It is called whenever a new component is created 
+Initialize the state or bind event handlers 
+It should not cause side effects like ( HTTP requests )
+Super(props)
+
+Static getDerivedStateFromProps(props, state)
+When the state of the component depends on changes in props over time
+Set the state
+Do not cause any side effects 
+
+getDerivedStateFromProps
+-- Is an optional function
+-- Invoked implicitly
+-- Invoked Multiple times
+    -- Invoked after constructor and before the render during the initial mount
+    -- Invoked whenever the props changes
+    -- Invoked whenever the component is updated
+-- static function -- called using the class name
+-- "this" -- not available
+-- Can we access the state, props -- NO
+-- Takes 2 params : newProps,prevState
+-- Manipulate the state based on the newProps
+-- Mandatory -- Return an object
+-- Returned object becomes the new state
+-- Introduced in version 17.X
+
+
+Render 
+Only required method
+Read props and state and return JSX
+Pure function
+Do not change state or interact with DOM or make HTTP calls
+
+componentDidMount 
+Only once during the entire lifecyle
+Invoked immediately after the component and all its children components have been rendered in the DOM
+We can have side effects here
+
+componentDidMount 
+-- Called only once during the entire lifecycle
+-- Called implicitly after the render and after the creation of Real DOM
+-- No params
+-- Request to the server, thirt party subscriptions
+
+
+
+Render
+-- called implicitly
+-- called initially when the component is mounted after the constructor
+-- lifecycle method 
+-- Called multiple times during the lifecycle
+-- Called explicitly -- NO
+-- Call some other function(setState) which will internally call the render function

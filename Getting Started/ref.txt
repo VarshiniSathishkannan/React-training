@@ -1,0 +1,48 @@
+What is ref in React?
+A ref (short for reference) in React is used to get direct access to a DOM element or a component without triggering re-renders.
+
+It’s like telling React:
+
+“Hey, remember this element/component for me so I can interact with it directly later.”
+
+🧠 When do you use ref?
+To focus an input field
+
+To trigger animations
+
+To read values from an uncontrolled input
+
+To measure DOM elements (like height, width, etc.)
+
+To use third-party DOM libraries (like a datepicker or chart lib)
+
+✍️ How to Create and Use a ref
+✅ Using useRef (in functional components)
+
+import React, { useRef } from 'react';
+
+function TextInput() {
+  const inputRef = useRef(null); // Create the ref
+
+  const focusInput = () => {
+    inputRef.current.focus(); // Access the DOM node and call focus
+  };
+
+  return (
+    <div>
+      <input ref={inputRef} type="text" placeholder="Type here..." />
+      <button onClick={focusInput}>Focus Input</button>
+    </div>
+  );
+}
+useRef(null) creates the ref.
+
+ref={inputRef} attaches it to the input.
+
+inputRef.current points to the actual DOM node.
+
+You can also store mutable values with useRef that persist across renders without causing re-renders.
+
+
+const count = useRef(0);
+count.current += 1; // Doesn't trigger re-render like useState does

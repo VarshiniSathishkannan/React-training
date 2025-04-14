@@ -1,0 +1,61 @@
+Render props
+This is also similar to HOC but the implementation is different. This is also used for sharing the functionality 
+import React from 'react'
+import Counter from './Counter';
+import ClickCounter from './ClickCounter';
+// import HoverCounter from './HoverCounter';
+
+const ContactUs = () => {
+
+return (
+    <div>
+         <Counter render = {(hover, handlehover) => (<ClickCounter count={hover} handle={handlehover}></ClickCounter>)}></Counter>
+    </div>
+);
+}
+
+export default ContactUs;
+
+import React, { Component } from 'react'
+
+class Counter extends Component {
+    constructor(props)
+    {
+        super(props)
+        this.state = {
+            hover:0
+        }
+    }
+
+    handleHover = () => {
+        this.setState(
+            (prev) => {
+               return{
+                hover : prev.hover + 1
+               }
+            }
+        )
+    }
+  render() {
+    return (
+      <div>{this.props.render(this.state.hover, this.handleHover)}</div>
+    )
+  }
+}
+
+export default Counter
+
+import React, { Component } from 'react'
+// import updatedComponent from './countH'
+
+export class ClickCounter extends Component {
+  render() {
+    return (
+      <div>
+        <button onClick={this.props.handle}>Clicked {this.props.count} times</button>
+      </div>
+    )
+  }
+}
+
+export default ClickCounter

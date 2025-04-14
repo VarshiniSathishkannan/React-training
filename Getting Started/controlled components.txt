@@ -1,0 +1,71 @@
+What is a Controlled Component in React?
+A controlled component is a form input (like <input>, <textarea>, or <select>) whose value is controlled by React state.
+
+In simple terms:
+
+React controls the data inside the input field via useState or this.state.
+
+📦 How It Works:
+The input's value comes from React's state.
+
+When the user types, it triggers an event (like onChange), which updates the state.
+
+The input re-renders with the updated state, so React always has the current value.
+
+✅ Example of a Controlled Component
+
+import React, { useState } from "react";
+
+function ControlledForm() {
+  const [name, setName] = useState("");
+
+  const handleChange = (event) => {
+    setName(event.target.value);
+  };
+
+  return (
+    <div>
+      <input type="text" value={name} onChange={handleChange} />
+      <p>Hello, {name}</p>
+    </div>
+  );
+}
+In this example:
+
+value={name} → the input is controlled by the name state.
+
+onChange={handleChange} → updates the state when the user types.
+
+🆚 Controlled vs Uncontrolled Components
+Feature	Controlled Component	Uncontrolled Component
+Data source	React state	DOM (the input holds its own value)
+Updates via	onChange handler updates state	React uses a ref to read input value
+Control level	Full control by React	Browser handles value; React is less involved
+Example usage	Forms with validation, dynamic input	Quick & simple forms, or one-off uncontrolled use
+🧪 Uncontrolled (for comparison):
+
+function UncontrolledForm() {
+  const inputRef = React.useRef();
+
+  const handleSubmit = () => {
+    alert(inputRef.current.value);
+  };
+
+  return (
+    <div>
+      <input type="text" ref={inputRef} />
+      <button onClick={handleSubmit}>Submit</button>
+    </div>
+  );
+}
+🎯 TL;DR:
+A controlled component in React is a form input whose value is managed by React state.
+
+✅ Benefits:
+
+Easier to validate
+
+Consistent data flow
+
+Better integration with React features (like conditional rendering, dynamic updates)
+

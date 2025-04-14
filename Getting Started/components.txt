@@ -1,0 +1,14 @@
+Components
+Components are the building blocks of react app. They are reusable and can be nested to other components. They are of .js extension
+Components are of 2 types:
+
+Functional component
+A simple component which may accept props and return an html (jsx)
+No ‘this’ keyword
+
+Class component
+constructor
+Super keyword
+this.state = { message : ‘hello’}
+Render method – within which we return the html (jsx)
+Lifecycle methods

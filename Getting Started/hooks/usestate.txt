@@ -1,0 +1,108 @@
+Hooks
+Hooks are used in functional components 
+Can’t use hooks inside class components
+They are a new feature addition in react version 16.8
+Avoid whole confusion with ‘this’ keyword
+Allow to use stateful logic
+Minification is faster and better since we are not using class 
+Organize better logic inside a component into reusable isolated units
+useState hook
+useState hook lets us add state to the functional components
+In classes, state is always an object but here it can take any value like string, number or array
+Usestate returns an array of 2 elements, the first element is the current value of the state and the second element is a state setter function. We call the setter function to rerender the component as well as change the value of the state. We can also use the prev value through function call
+We have to spread the value if we are changing only certain params in a object
+useState takes up two parameters – initial value and the optional one which the  and returns 2 values, one is the state value the other is the function which changes the state
+Only call hooks at the top level, don’t call it inside loops, conditions or nested functions
+Only call hooks within react functional components and not just any regular JS function
+import React from 'react'
+
+export default function Hooks() {
+  const [counter, setCounter] = React.useState(0);
+  return (
+    <>
+     <div>
+        <button onClick={() => setCounter(counter+1)}>Counter </button>
+     </div>
+    </>
+  )
+}
+
+For using the prev state, it is unsafe to follow the above method,
+
+import React from 'react'
+
+export default function Hooks() {
+    const [count, setCount] = React.useState(0);
+
+    const handleFive = () => {
+        for(let i=0;i<5;i++)
+        {
+            setCount(count+1);
+        }
+    }
+  return (
+    <div>
+        count : {count}
+        <button onClick={() => setCount(count+1)}>Increment</button>
+        <button onClick={() => setCount(count-1)}>Decrement</button>
+        <button onClick={() => setCount(0)}>Reset</button>
+        <button onClick={handleFive}>increment by 5</button>
+    </div>
+  )
+}
+
+
+Here for increment by 5 where we are using the for loop, It behaves unexpectedly, where the count will only be incremented to 1 instead of 5
+    const handleFive = () => {
+        for(let i=0;i<5;i++)
+        {
+            setCount(count => count+1);
+        }
+    }
+
+Instead we have to pass it as a function, this is the right approach
+Ans also usestate hook will not merger the state, instead it will replace it
+import React from 'react'
+
+export default function Hooks() {
+    const [count, setCount] = React.useState(0);
+    const [name, setName] = React.useState({firstname : '', lastname : ''});
+
+    const handleFive = () => {
+        for(let i=0;i<5;i++)
+        {
+            setCount(count => count+1);
+        }
+    }
+  return (
+    <>
+    <div>
+        count : {count}
+        <button onClick={() => setCount(count+1)}>Increment</button>
+        <button onClick={() => setCount(count-1)}>Decrement</button>
+        <button onClick={() => setCount(0)}>Reset</button>
+        <button onClick={handleFive}>increment by 5</button>
+    </div>
+    <form>
+        <label>FirstName</label>
+        <input type='text' name='firstname' value={name.firstname} onChange={e => setName({firstname : e.target.value})}/>
+        <label>LastName</label>
+        <input type='text' name='lastname' value={name.lastname} onChange={e => setName({lastname : e.target.value})}/>
+    </form>
+    <div>
+        {name.firstname}
+        {name.lastname}
+        {JSON.stringify(name)}
+    </div>
+    </>
+  )
+}
+
+In this code if u see, firstname and lastname are changes independently since the usestate hook does not merge, they are taken as separate objects instead of combined, so only one is displayed at a time
+So, we have to first use spread operator to use the already existing values and override the first or lastname
+    <form>
+        <label>FirstName</label>
+        <input type='text' name='firstname' value={name.firstname} onChange={e => setName({...name, firstname : e.target.value})}/>
+        <label>LastName</label>
+        <input type='text' name='lastname' value={name.lastname} onChange={e => setName({...name, lastname : e.target.value})}/>
+    </form>

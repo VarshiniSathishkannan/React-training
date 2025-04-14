@@ -1,0 +1,122 @@
+HTTP Request
+React does not have any inbuilt package for contacting the server. We have to download the package and use it 
+We can either use fetch or axios for HTTP requests
+Npm install axios
+Import axios from ‘axios’
+Axios is a promise based function, we can use then to return the result
+GET
+import React, { Component } from 'react'
+import axios from 'axios'
+
+export class ComponentA extends Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       posts : []
+    }
+  }
+
+  componentDidMount() {
+      axios.get('https://jsonplaceholder.typicode.com/posts')
+      .then(response => {
+        console.log(response);
+        this.setState({posts : response.data})
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
+  render() {
+    return (
+      <div>
+        <div>
+          List of posts
+          {
+            this.state.posts.map(post => <div key={post.id}> {post.body} </div>)
+          }
+        </div>
+      </div>
+
+    )
+  }
+}
+
+export default ComponentA
+
+POST
+
+  changeHandler = (e) => {
+      this.setState({
+        [e.target.name]: e.target.value
+      })
+  }
+
+It's the new ES2015 (the EcmaScript spec formally known as ES6) computed property name syntax. It's a shorthand for the someObject[someKey] assignment that you know from ES3/5:
+
+var a = "b"
+var c = {[a]: "d"}
+is syntactic sugar for:
+
+var a = "b"
+var c = {}
+c[a] = "d"
+
+  handleSubmit = (e) => {
+     e.preventdefault()
+  }
+
+To avoid page refresh
+import React, { Component } from 'react'
+import axios from 'axios'
+
+export class ComponentB extends Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       userId : '',
+       Title : '',
+       Body : ''
+    }
+  }
+
+  changeHandler = (e) => {
+      this.setState({
+        [e.target.name]: e.target.value
+      })
+  }
+
+  handleSubmit = (e) => {
+     e.preventDefault();
+     console.log(this.state);
+     axios.post('https://jsonplaceholder.typicode.com/posts',this.state)
+     .then(response => {
+      console.log(response)
+     })
+     .catch(error => {console.log(error)}
+     )
+  }
+
+  render() {
+    const { userID , title, body } = this.state
+    return (
+      <>
+      <div>ComponentB</div>
+      <form onSubmit={this.handleSubmit}>
+        <title> HTTP POST </title>
+        <label> UserID </label>
+        <input type='text' name='userId' value={userID} onChange={this.changeHandler}/>
+        <label> Title </label>
+        <input type='text' name='Title' value={title} onChange={this.changeHandler}/>
+        <label> Body </label>
+        <input type='text' name='Body' value={body} onChange={this.changeHandler}/>
+        <button type='submit'>Submit</button>
+      </form>
+      </>
+    )
+  }
+}
+
+export default ComponentB

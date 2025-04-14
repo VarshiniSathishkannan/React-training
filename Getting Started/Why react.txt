@@ -1,0 +1,31 @@
+faster performance 
+	--initial load of the app; time for the user reaction and response
+	-- app size (file -- browser) plays a major role in initial load 
+	-- cost involved
+easier to develop
+scalable
+open source
+less complexity, less processing
+unit testing 
+Facebook (meta),
+preferred choice for app developers
+largest community
+component based architecture(modularity)
+Reusability
+virtual DOM
+client side library
+can be used for building mobile app(IOS,android)-- react native
+Single Page App (SPA) -- one index.html file; based on the routing, load different contents in the same index.html – takes a little time for user request and response
+uglification and minification -- app faster 
+immutability -- once created, cannot be changed -- virtual DOM
+MVC - model (data); view (UI); controller -- bridge b/w the model and view
+Is not a framework; Only a library
+js -- language; jquery -- library (write less do more)
+Is only the view part of the application
+uni directional flow of data – when model changes the view changes or vice versa 
+unit testing 
+	-- unit testing the front end completely
+	-- unit test the module/component seperately
+jest framework -- built in 
+Angular -- two way data binding ;
+any changes in the UI will get updated in the model automatically and vice versa 

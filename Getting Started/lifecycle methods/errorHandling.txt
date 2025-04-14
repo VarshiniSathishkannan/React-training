@@ -1,0 +1,3 @@
+When there is an error during render, in a lifecycle method or in the constructor of any child component
+Static getDerivedStateFromError
+componentDidCatch

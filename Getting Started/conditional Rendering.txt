@@ -1,0 +1,4 @@
+Conditional Rendering
+•	If, else statement cannot be used inside JSX, we can call anonymous func or assign it to a variable outside the return statement
+•	Ternary operator return {this.state.loggedin ? <div> hello <div> : <div> hi <div>}
+•	Short circuit – only one condition {this.state.show && <Friends></Friends>}

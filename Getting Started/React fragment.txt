@@ -1,0 +1,12 @@
+React Fragment
+
+A common pattern in React is for a component to return multiple elements. Fragments let you group a list of children without adding extra nodes to the DOM.
+render() {
+    return (
+      <React.Fragment>
+        <td>Hello</td>
+        <td>World</td>
+      </React.Fragment>
+    );
+  }
+We can also use <> </> empty tags like this, but we cannot pass key attribute but we can pass attribute with react fragment

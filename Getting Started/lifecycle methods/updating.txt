@@ -1,0 +1,28 @@
+Updating
+When a component is rerendered as a result of a change to either its props or state
+
+Static getDerivedStateFromProps(props, state)
+Method is called everytime a component is re rendered. Rerender occurs whenever there is a change in either state or props.
+Set the state
+Do not cause any sideeffects
+
+shouldComponentUpdate( nextProps, nextState )
+Dictates if the component should re-render or not
+Performance optimization
+Do not cause any sideeffects
+Returns true or false 
+
+Render
+Only required method
+Read props and state and return JSX
+Pure function
+Do not change state or interact with DOM or make HTTP calls
+
+getSnapshotBeforeUpdate( prevProps, prevState)
+Called right before the changes from the virtual DOM are to be reflected in the DOM
+Capture some info from the DOM
+Method will either return null or return a value. Returned value will be passed as the third parameter to the next method
+
+componentDidUpdate(prevProps, prevState, snapshot)
+this is called after rerender in finished
+Called only once, so we can make side-effects

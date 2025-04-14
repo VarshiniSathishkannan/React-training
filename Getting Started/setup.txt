@@ -1,0 +1,98 @@
+Npm -v
+Node -v
+Npm and node.js has to be installed for react applications 
+
+npm create-react-app myapp
+
+•	React
+•	React-dom
+•	React-scripts 
+•	Web vitals
+
+After project is created,
+React scripts will run
+Webpack compiles and development server starts
+
+A new folder will be created called myapp – it contains
+1.	Node modules – Contains all the dependencies which are installed
+2.	Public – static resources, index.html file.
+3.	Src – all the source code files – components and their respective files
+4.	Package.json – configuration file. Dependencies of the project ( dev and prod) Version relevant, linting rules
+5.	Package-lock.json – Contains the exact version of the dependencies. It must not be deleted at any cost or modified
+
+Npm always installs the latest version 
+
+PWA – Progressive Web App 
+https://www.techtarget.com/whatis/definition/progressive-web-app-PWA
+
+SEO – Search Engine Optimised 
+Search result when searched on google
+https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+
+Reportwebvitals – Found on src
+To get more insights on the app which we are developing
+
+npm install modulename --save
+
+This command will install the module in the local project folder where we are running this command and add it as a dependency in the package.json
+Node modules is a huge folder when we are tyring to put the code on GIT or sharing, we will not send the node modules along the other folder. That is why we have package.json and package-lock.json files to let the others who abt the dependencies and the version we are currently using
+
+npm install
+
+Creates the node modules folder
+Install the dependencies mentioned in package.json file
+Semantic versioning :
+Will be found in package.json file
+^18.2.0
+~18.2.0
+Package-lock.json will show the exact version
+Git – version package_lock.json
+
+
+Npm eject
+React scripts will start the development server and webpack 
+All the details are abstracted from the developer itself
+Change the port number 
+1. Explicitly give the port number in the react scripts
+2. Npm eject -- one time process -- cannot be rollback -- give all the configuration files and the developer has to maintain it
+
+When you eject:
+
+CRA copies all the configuration files (Webpack, Babel, ESLint, etc.) into your project folder under /config and /scripts.
+
+It adds all the dependencies (like Webpack, Babel, etc.) to your package.json.
+
+You can now edit these configs freely — like adding custom Webpack loaders, modifying Babel presets, etc.
+
+But: ❗ You can't go back! Once you eject, you are responsible for maintaining everything.
+
+After Ejecting, You'll See:
+/config folder (Webpack and environment configs)
+
+/scripts folder (scripts like build, start, test)
+
+Modified package.json with lots of new dependencies like:
+
+webpack, webpack-dev-server, babel-loader, etc.
+
+Removed react-scripts (since you now run the scripts directly)
+
+SET PORT = 3001 && react-scripts start
+PORT = 3001 for Mac
+
+Webpack
+It will combine all the src files into a single JS file called bundle.js
+Index.html gets connected to all the js files( src, nodemodules) and .css files (src) and images in .src folder and all the files (irrespective of the extension) will be bundled by webpack into a single .js file
+More the number of images in src -- bigger the bundle.js file -- bundle.js file is large -- more the time for loading 
+Best practice for location for images : public
+Bundling -- compression  -- uglification  -- minification -- translation -- at runtime
+The bundle.js can be found it in the page source because it is generated at runtime
+The react scripts added the script tag in the page source .
+
+Your folder of learning notes (/getting-started) won’t affect your app if:
+
+It’s not imported or referenced anywhere in your code.
+
+It’s outside the src or public folders, or inside src but not involved in any logic.
+
+The files inside are .txt, .md, or other static formats not interpreted by React/Webpack.

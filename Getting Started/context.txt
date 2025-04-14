@@ -1,0 +1,55 @@
+Context
+Context provides a way to pass data through the component tree without having to pass props down manually at every level
+UserContext.js
+import React from "react";
+
+const UserContext = React.createContext()
+
+const Provider = UserContext.Provider
+const Consumer = UserContext.Consumer
+
+export { Provider, Consumer }
+
+top level component in the tree 
+import React from 'react'
+import ComponentA from './ComponentA';
+import { Provider } from './UserContext';
+
+const ContactUs = () => {
+
+return (
+    <div>
+        <Provider value='Varshini'>
+        <ComponentA></ComponentA>
+        </Provider>
+    </div>
+);
+}
+
+export default ContactUs;
+
+
+The value is passed down from A to C, but instead of passing it down through props we are directly using the component Consumer and provider which we have declared in the UserContext.js
+componentA
+componentB
+componentC
+import React, { Component } from 'react'
+import { Consumer } from './UserContext'
+
+export class ComponentC extends Component {
+  render() {
+    return (
+      <>
+      <Consumer>
+      {
+        username => {
+            return <div> Hello {username} </div>
+        }
+      }
+      </Consumer>
+      </>
+    )
+  }
+}
+
+export default ComponentC

@@ -1,0 +1,13 @@
+var i=0;console.log(i);i=i+1; console.log(i);function takeTwoNumbersAndReturnSum(a,b){return a+b;} 
+
+-- ugly; readability is zero(developer's); less memory(smaller file size)
+
+load a file in browser
+-- beautifully edited file of 10 gb
+-- no indended code but only 5gb of size -- YES
+
+Js -- uglification : remove all the white spaces and try th reduce the file size ; give alias names for very big function names
+
+Minification – Alias name for functions with big names. To reduce the file size
+Both uglification and minification will be handled inherently by the Javascipt
+Developers have built numerous tools designed to streamline the minification of JavaScript code. When this guide was originally published, the most popular JavaScript minification solutions were UglifyJS, babel-minify (formerly Babili), and Terser. Since then, Terser has become the most popular tool among the three and enjoys widespread use in 2021.

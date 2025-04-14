@@ -1,0 +1,19 @@
+State
+-- local mutable data of the component
+-- Always in the object
+-- this.state = { message = ‘hello’ }
+-- Initialise it in the constructor
+-- Mutate(change) the state directly -- NO
+-- Mutate the state using setState()
+
+setState()
+-- async method to mutate the state of component
+-- 2 params ; 1st mandatory; 2nd -- optional
+-- setState(obj/function, callback function)
+-- obj as the first param -- merged with the existing state and merged obj becomes the new state
+-- function – if we have to work with the prev state of the state, Manipulate on basis of existing values this must return an object, returned object will be merged with the existing state and merged obj becomes the new state
+   this function will also take 2 params one is prevstate and other is props which is optional it can be used if we have to work with props 
+-- callback function; invoked implicitly when the setState has completed its operation – when code has to be executed after the state has been updated. Place the code in the callback function.
+setState() method when called will do these 2 things
+1. Modify the state of the component
+2. Call the render implicitly

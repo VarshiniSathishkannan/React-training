@@ -1,0 +1,16 @@
+Import/Export 
+The export statement is used when creating JavaScript modules to export objects, functions, variables from the module so they can be used by other programs with the help of the import statements. 
+There are two types of exports. 
+Named Exports
+Default Exports
+
+Named Exports: Named exports are useful to export several values. During the import, it is mandatory to use the same name of the corresponding object.
+
+Default Exports: Default exports are useful to export only a single object, function, variable. During the import, we can use any name to import.
+
+While importing this module.js we can use any name for default export and curly braces for other named exports.
+
+Example:
+
+export { fun as default, x, y, square };
+import anyname, { x, y, square} from './module.js';

@@ -1,0 +1,18 @@
+Interpolation is the process of inserting (or embedding) dynamic values into strings or templates.
+
+🧪 In JavaScript (Using Template Literals)
+
+const name = "Alex";
+const greeting = `Hello, ${name}!`;
+console.log(greeting); // Output: Hello, Alex!
+${name} is interpolation.
+
+The value of name gets inserted into the string at runtime.
+
+⚛️ In JSX (React)
+
+const name = "Alex";
+return <h1>Hello, {name}!</h1>;
+The curly braces {} in JSX allow JavaScript expressions.
+
+Inside JSX, interpolation is how you display values from variables or functions directly inside the UI.

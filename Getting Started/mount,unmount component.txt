@@ -1,0 +1,33 @@
+Mount/unmount of component
+
+On click of cancel button (AddToCart) -- unmount AddToCart component
+Mount the AddToCart component:
+showAddToCart(ProductInfo ) -- changed it to true -- setState()
+1. Modify the state of ProductInfo --showAddToCart -- true
+2. call the render of ProductInfo again 
+2.a AddToCart will be mounted; constructor and render of AddToCart will be executed
+3. If callback present, callback will be executed
+
+Unmount the AddToCart component: -- by clicking the cancel button (AddToCart)
+trigger an event in the parent component-- corresponding event handler will be executed
+showAddToCart(ProductInfo ) -- changed it to false-- setState()
+1. Modify the state of ProductInfo --showAddToCart -- false
+2. call the render of ProductInfo again 
+2.a AddToCart will be unmounted(if it is mounted);
+ componentWillUnmount of AddToCart will be executed
+3. If callback present, callback will be executed
+Child to parent communication:
+Events and event handlers
+
+Sample Component:
+<input type="button" value="Add" onClick={this.addEventHandler} />
+
+1. input tag is present -- Sample component
+2. addEventHandler -- within Sample component outside the render
+3. onClick -- synthetic event ; On trigger of the event, handler gets invoked implicitly
+4. Trigger the event ; user click on button
+
+Replace Sample component with parent
+Replace input tag with the child
+parent -- ProductInfo
+child – AddToCart
