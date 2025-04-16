@@ -1,0 +1,20 @@
+React vs Angular — Key Differences
+Feature	React	Angular
+Type	Library (for building UI)	Full-fledged Framework
+Maintained By	Meta (Facebook)	Google
+Language	JavaScript (or TypeScript)	TypeScript (mandatory)
+Learning Curve	Relatively easier (just JS + JSX)	Steeper (more concepts & syntax)
+Architecture	View layer only (uses other libs for routing, etc.)	Complete MVC/MVVM framework
+Rendering	Client-side (with SSR support via Next.js)	Client-side & Server-side (with Angular Universal)
+DOM Handling	Uses Virtual DOM	Uses Real DOM with Change Detection
+UI Binding	One-way binding (props → child)	Two-way binding (via [(ngModel)])
+Component Syntax	JSX + JS/TS functions	HTML templates + decorators + TypeScript classes
+Routing	External (react-router)	Built-in routing module
+State Management	External (like Redux, Zustand, Context API)	Built-in services & RxJS (Reactive)
+Performance	Fast (with tuning)	Slightly heavier, but powerful
+
+Framework VS library:
+
+Library - Developers import the library and use it
+
+Framework - Developers need to follow a specific structure or pattern defined by the framework

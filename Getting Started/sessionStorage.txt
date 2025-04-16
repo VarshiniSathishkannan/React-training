@@ -1,0 +1,45 @@
+What is Session Storage?
+sessionStorage is part of the Web Storage API, and it's used to store key-value pairs in the browser — per tab, and per session.
+
+Think of it as a short-term notepad that remembers data only while the browser tab is open.
+
+🧩 Key Features
+
+Feature	Description
+📌 Storage Scope	Only for the current tab (not shared across tabs or windows)
+🕒 Lifetime	Data is deleted when the tab or window is closed
+🧠 Data Type	Stores everything as strings
+📦 Capacity	Around 5MB (varies per browser)
+🔐 Domain-based	Only accessible by scripts from the same origin
+🔧 Basic Usage
+✅ Set an item
+
+sessionStorage.setItem("username", "john_doe");
+✅ Get an item
+
+const user = sessionStorage.getItem("username");
+console.log(user); // "john_doe"
+✅ Remove an item
+
+sessionStorage.removeItem("username");
+✅ Clear all session storage
+
+sessionStorage.clear();
+🧪 Real Example
+Let’s say you want to store a user’s name temporarily while they fill out a multi-step form:
+
+
+sessionStorage.setItem("step1Name", "Alice");
+Then on the next page/step:
+
+
+const name = sessionStorage.getItem("step1Name");
+Once they close the tab — it's gone. Perfect for data you don’t need to persist long-term.
+
+❓ How is it different from Local Storage?
+
+Feature	sessionStorage	localStorage
+Scope	Current tab only	All tabs and windows
+Lifetime	Until tab is closed	Until explicitly cleared
+Shared across tabs?	❌ No	✅ Yes
+Storage limit	~5MB (varies)	~5–10MB (varies)

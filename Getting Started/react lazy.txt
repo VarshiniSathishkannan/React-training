@@ -1,0 +1,53 @@
+⚛️ What is React.lazy?
+React.lazy() is a function that lets you dynamically import a component only when it's needed (instead of during the initial load). This helps improve performance and load time, especially in large apps.
+
+👉 It works with code-splitting by telling React:
+
+“Hey, don’t load this component until it’s actually being used.”
+
+🧠 Why use it?
+Reduces initial bundle size
+
+Speeds up initial page load
+
+Loads components on demand
+
+🔧 Syntax:
+
+const MyComponent = React.lazy(() => import('./MyComponent'));
+Notice it uses a function that returns a dynamic import().
+
+It returns a Promise, so React knows it’s async.
+
+🧪 Example Usage:
+
+import React, { Suspense } from 'react';
+
+const LazyProfile = React.lazy(() => import('./Profile'));
+
+function App() {
+  return (
+    <div>
+      <h1>Welcome!</h1>
+
+      <Suspense fallback={<div>Loading Profile...</div>}>
+        <LazyProfile />
+      </Suspense>
+    </div>
+  );
+}
+🔍 What is Suspense?
+Since React.lazy() is async, we need a way to show a loading state while the component is being fetched. That’s what React.Suspense is for.
+
+
+<Suspense fallback={<div>Loading...</div>}>
+  <LazyComponent />
+</Suspense>
+fallback is shown while the lazy component is loading.
+
+⚠️ Limitations
+Only works for default exports
+
+Doesn’t work with named exports
+
+You must use it with <Suspense>

@@ -22,6 +22,7 @@ return (
 export default ContactUs;
 
 Child parent communication
+
 We can pass data to parent through methods,
 A method is passed as a props from parent to child. That method can be invoked in the child and we can also pass parameters to it.
 The method defn will be in the parent but invoked from child
@@ -35,4 +36,14 @@ Parent :
 Child :
 <button onClick={() => {this.props.converse('Varshini')}}> What's new </button>
 
+Prop Drilling:
 
+Process of passing data through multiple layers of components
+
+Ways to avoid prop drilling:
+
+1. Using context API
+2. Using redux
+3. Using Component Composition 
+4. Using Callback functions
+5. Using Custom hooks

@@ -1,4 +1,9 @@
 State
+
+It refers to the current data of the component
+
+Stateful or state management means, when a user performs some actions on the UI, then the react application should be able to update and rerender that state or data on the UI
+
 -- local mutable data of the component
 -- Always in the object
 -- this.state = { message = ‘hello’ }

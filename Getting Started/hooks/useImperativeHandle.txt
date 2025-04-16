@@ -1,0 +1,49 @@
+useImperativeHandle is a React Hook that lets you customize the instance value that is exposed to parent components when using ref. It's typically used when you are building a component that needs to expose a limited or specific set of methods to its parent, rather than exposing the entire DOM node or component instance.
+
+📦 Syntax:
+
+useImperativeHandle(ref, createHandle, [deps])
+🔧 Parameters:
+ref: The ref object forwarded to the child component using forwardRef.
+
+createHandle: A function that returns the object you want to expose.
+
+[deps]: Optional dependency array — recomputes the handle if dependencies change.
+
+🔍 Common Use Case
+When you want a parent component to call a method on a child component, but you don’t want to expose the whole internal implementation.
+
+🔨 Example:
+
+import React, { useImperativeHandle, useRef, forwardRef } from 'react';
+
+const CustomInput = forwardRef((props, ref) => {
+  const inputRef = useRef();
+
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      inputRef.current.focus();
+    },
+    clear: () => {
+      inputRef.current.value = '';
+    }
+  }));
+
+  return <input ref={inputRef} />;
+});
+
+export default function ParentComponent() {
+  const inputRef = useRef();
+
+  return (
+    <div>
+      <CustomInput ref={inputRef} />
+      <button onClick={() => inputRef.current.focus()}>Focus Input</button>
+      <button onClick={() => inputRef.current.clear()}>Clear Input</button>
+    </div>
+  );
+}
+✅ Why use it?
+Encapsulation: Only expose what’s necessary.
+
+Control: Give parent components precise control without leaking internal refs.

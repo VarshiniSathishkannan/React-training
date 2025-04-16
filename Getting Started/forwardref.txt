@@ -1,0 +1,38 @@
+forwardRef in React — super useful when you want to expose a ref from a child component to its parent.
+
+React.forwardRef is a function that lets you forward a ref through a component to one of its child DOM elements.
+
+for ref explanation, refer useref in hooks
+
+By default, refs don’t get passed from parent to child unless you do it manually — that’s where forwardRef comes in.
+
+👇 Without forwardRef (ref won’t reach the input):
+
+function MyInput() {
+  return <input />;
+}
+
+const inputRef = useRef();
+<MyInput ref={inputRef} /> // ❌ Doesn't work
+✅ With forwardRef:
+
+import React, { forwardRef } from 'react';
+
+const MyInput = forwardRef((props, ref) => {
+  return <input ref={ref} {...props} />;
+});
+
+// Usage
+import { useRef } from 'react';
+
+function App() {
+  const inputRef = useRef();
+
+  return (
+    <>
+      <MyInput ref={inputRef} />
+      <button onClick={() => inputRef.current.focus()}>Focus</button>
+    </>
+  );
+}
+✅ Now when you click the button, it will focus the input — because the ref is passed down and attached to the actual DOM node.

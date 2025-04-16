@@ -1,0 +1,39 @@
+What is useMemo?
+useMemo is a React Hook that lets you memoize (cache) the result of a calculation so it's not recalculated on every render, unless its dependencies change.
+
+📌 Why use it?
+React components re-render often — and if they do expensive calculations during rendering, that can slow things down.
+
+useMemo helps by saving the result of a function until the inputs change, preventing unnecessary recalculations.
+
+✅ Syntax:
+
+const memoizedValue = useMemo(() => {
+  // some expensive calculation
+  return result;
+}, [dependencies]);
+🧪 Example: Avoiding Expensive Recalculation
+
+import React, { useMemo, useState } from 'react';
+
+function ExpensiveComponent({ num }) {
+  const expensiveCalc = (n) => {
+    console.log('Calculating...');
+    let result = 0;
+    for (let i = 0; i < 1e7; i++) {
+      result += n * i;
+    }
+    return result;
+  };
+
+  const memoizedValue = useMemo(() => expensiveCalc(num), [num]);
+
+  return <div>Calculated Value: {memoizedValue}</div>;
+}
+🚀 What happens here:
+expensiveCalc(num) runs only when num changes
+
+If the component re-renders for any other reason (like parent re-render), the calculation is skipped unless the num prop changed
+
+🔁 Without useMemo:
+The calculation would run on every render — even if num didn’t change, which is a performance hit.

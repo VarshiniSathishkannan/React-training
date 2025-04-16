@@ -4,53 +4,9 @@ This is a replacement for the below lifecycle methods
 componentDidMount()
 componentDidUpdate()
 componentWillUnmount()
-Implementation using Class component
-
-import React, { Component } from 'react'
-
-export class ComponentC extends Component {
-  constructor(props) {
-    super(props)
-  
-    this.state = {
-       count: 0
-    }
-  }
-
-  componentDidMount(){
-    document.title =`u clicked ${this.state.count} times`;
-  }
-
-  componentDidUpdate(prevProps, prevState){
-    document.title =`u clicked ${this.state.count} times`;
-  }
-
-  componentWillUnmount(){
-    document.title = `u clicked 0 times`;
-  }
-
-  increment = () => {
-      this.setState(prev => {
-        return(
-          {
-            count : prev.count + 1
-          }
-        )
-      })
-  }
-
-  render() {
-    return (
-      <div>
-        <button onClick={this.increment}>Click {this.state.count}</button>
-      </div>
-    )
-  }
-}
-
-export default ComponentC
 
 useEffect hook will accept a function as a parameter which gets executed after every render of the component
+
 import React from 'react'
 
 export default function EffectHook() {
@@ -66,37 +22,59 @@ export default function EffectHook() {
   )
 }
 
-Here it will execute on the first render and every render after that, This is a replacement for componentDidMount and componentDidUpdate
-Conditional update
+🧠 What This Code Does:
+1. Initial Setup
+count is initialized to 0 using useState.
 
-  componentDidUpdate(prevProps, prevState){
-    if(prevState.count !== this.state.count)
-        console.log(`Updating Document title`);
-    document.title =`u clicked ${this.state.count} times`;
-  }
+A button is rendered that shows:
+Increment count 0
 
-For useEffect, we can mention it in the dependency array 
-  React.useEffect(() =>
-    {
-      console.log('Useeffect');
-      document.title = `u clicked ${count} times`
-    }, [count]
-  )
+2. Clicking the Button
+Clicking the button increases the count (setCount(prev => prev + 1)).
+
+The component re-renders with the new count.
+
+3. useEffect Runs After Every Render
+useEffect(() => { ... }) with no dependency array runs after every render.
+
+It sets the document title of the browser tab like:
+
+"u clicked 1 times"
+"u clicked 2 times"
+...
+🎯 Result:
+The button updates the count.
+
+The browser tab title updates every time you click, showing how many times you clicked.
+
+
 
 If we have more than one state, then this method works, if we only one state then it may throw error for that
 Mimic only componentDidMount with useEffect by specifying a empty array [] as dependency
 
 Mimic componentWillUnmount with useEffect by using a return statement
-useEffect must not return anything besides a function, which is used for clean-up. You returned: u clicked 0 times
-We must return a cleanup function not any statement
-  React.useEffect(() =>
-    {
-      console.log('Useeffect');
-      document.title = `u clicked ${count} times`
-      return() => document.title = `u clicked 0 times`
-  
-    }, [count]
-  )
+useEffect must not return anything besides a function, which is used for clean-up. 
+
+Common Use Cases for Cleanup:
+Use Case	What You Setup	What You Cleanup
+🕰️ Timer	setInterval, setTimeout	clearInterval, clearTimeout
+📞 API or sockets	Open WebSocket or fetch data	Close connection, cancel request
+👂 Event listeners	window.addEventListener	removeEventListener
+🧼 DOM manipulation	External DOM refs or libraries	Undo or destroy them
+
+useEffect(() => {
+  const timer = setInterval(() => {
+    console.log('Tick');
+  }, 1000);
+
+  // Cleanup before component unmount or effect re-runs
+  return () => {
+    clearInterval(timer);
+    console.log('Timer cleared');
+  };
+}, []);
+
+
 
 And also 
   React.useEffect( () => {

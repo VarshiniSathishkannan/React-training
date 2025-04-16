@@ -1,0 +1,36 @@
+🔍 What is useParams?
+useParams lets you access the URL parameters from the current route — those parts in the URL that are dynamic like :id, :slug, etc.
+
+🧠 Syntax:
+
+const params = useParams();
+It returns an object where keys are the parameter names, and values are strings pulled from the URL.
+
+🧪 Example Route Setup:
+
+<Route path="/user/:userId" element={<UserProfile />} />
+🧩 Inside UserProfile component:
+
+import { useParams } from 'react-router-dom';
+
+function UserProfile() {
+  const { userId } = useParams();
+
+  return <h1>User ID: {userId}</h1>;
+}
+If the URL is /user/42, then:
+
+
+userId === "42"
+✅ It's always a string, so if you need a number, you'll have to cast it:
+
+
+const userId = Number(params.userId);
+📦 Another Example — Blog Post
+Route:
+
+<Route path="/blog/:slug" element={<BlogPost />} />
+Component:
+
+const { slug } = useParams();
+// fetch blog post using slug

@@ -1,0 +1,11 @@
+They are stateless components but with the help of hooks, we can manage the state as well
+
+import react from 'react';
+
+function Component() {
+    return(
+        <h1> Interview Happy </h1>
+    );
+}
+
+export default Component;

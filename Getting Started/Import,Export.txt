@@ -14,3 +14,89 @@ Example:
 
 export { fun as default, x, y, square };
 import anyname, { x, y, square} from './module.js';
+
+Why Use Curly Braces {} When Importing?
+You use curly braces {} when you're importing a named export.
+
+✅ Example — Named Export (uses {} when importing):
+
+// utils.js
+export function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+// App.js
+import { greet } from './utils';  // ✅ curly braces are required
+🔎 Because greet is named — it was exported with its own name, not as default.
+
+🧩 Without Curly Braces — Default Export
+If a module uses a default export, you import it without curly braces.
+
+✅ Example — Default Export:
+
+// utils.js
+export default function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+// App.js
+import greet from './utils'; // ✅ no curly braces needed
+Here, greet is the default export, so you can give it any name when importing.
+
+When to Use Default Export
+Use default exports when your module or file exports a single primary value — like one function, class, or component.
+
+Use named exports when:
+
+You’re exporting multiple values from a file.
+
+You want to take advantage of auto-imports, renaming, or tree-shaking.
+
+You want better editor support and error messages (named exports are stricter).
+
+For components: default export is fine.
+For utilities/helpers/services: prefer named exports for better scalability.
+
+Because default means "this is the main export", and JavaScript modules can only have one main/default export.
+
+Trying to add more than one will cause a syntax error.
+
+❌ Invalid Example (won't work):
+
+// Not allowed!
+export default function sayHi() {
+  return "Hi!";
+}
+
+export default function sayBye() {
+  return "Bye!";
+}
+❌ This will throw an error:
+"SyntaxError: Only one default export allowed per module"
+
+✅ What You Can Do Instead:
+Option 1: One default + Named exports
+
+// greetings.js
+export default function sayHi() {
+  return "Hi!";
+}
+
+export function sayBye() {
+  return "Bye!";
+}
+
+// App.js
+import sayHi, { sayBye } from './greetings';
+
+console.log(sayHi());  // "Hi!"
+console.log(sayBye()); // "Bye!"
+Option 2: All named exports (recommended for multiple exports)
+
+export function sayHi() {
+  return "Hi!";
+}
+
+export function sayBye() {
+  return "Bye!";
+}

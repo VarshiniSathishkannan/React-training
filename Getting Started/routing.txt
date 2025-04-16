@@ -1,0 +1,172 @@
+1. Install React Router
+
+npm install react-router-dom
+
+App.js
+
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+
+import Home from './components/Home';
+import About from './components/About';
+import Contact from './components/Contact';
+
+function App() {
+  return (
+    <Router>
+      <nav>
+        {/* Navigation links */}
+        <Link to="/">Home</Link> | 
+        <Link to="/about">About</Link> | 
+        <Link to="/contact">Contact</Link>
+      </nav>
+
+      {/* Define the routes */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
+
+Example Component: Home.js
+
+import React from 'react';
+
+function Home() {
+  return <h2>Welcome to the Home Page</h2>;
+}
+
+export default Home;
+
+You'd do something similar for About.js and Contact.js.
+
+Bonus: Programmatic Navigation
+
+To navigate via code (like after a form submit), use the useNavigate() hook:
+
+
+import { useNavigate } from 'react-router-dom';
+
+function Form() {
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    // do something...
+    navigate('/thank-you'); // Redirect to another route
+  };
+
+  return <button onClick={handleSubmit}>Submit</button>;
+}
+
+Use react-router-dom for routing.
+
+Wrap your app in <BrowserRouter>.
+
+Define routes using <Routes> and <Route>.
+
+Use <Link> for navigation without full reloads.
+
+What are Route Params?
+Route Params are dynamic values in the URL that you can use to pass data to components through the route.
+
+They are super useful when you want to display content based on something in the URL — like a user ID, product ID, blog post slug, etc.
+
+Example: /user/:id
+
+<Route path="/user/:id" element={<User />} />
+Here, :id is a parameter, meaning the route can match:
+
+/user/1
+
+/user/123
+
+/user/alex
+
+And inside the User component, you can access the id value!
+
+🛠️ How to Use Route Params in React Router (v6+)
+1. Define the Route with a :param
+
+<Route path="/user/:id" element={<User />} />
+
+2. Use the useParams() hook to access the value
+
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
+function User() {
+  const { id } = useParams(); 
+  return <h2>User ID is: {id}</h2>;
+}
+
+Now if you go to /user/42, it’ll show:
+
+User ID is: 42
+
+You Can Use Multiple Params
+
+<Route path="/user/:userId/post/:postId" element={<Post />} />
+
+const { userId, postId } = useParams();
+
+Bonus: Links with Params
+
+You can navigate to a param-based route like this:
+
+<Link to="/user/101">Go to User 101</Link>
+
+Or programmatically:
+
+navigate(`/user/${userId}`);
+
+Both Link and navigate in React Router are used for navigating between routes, but they serve different purposes and are used in different ways
+
+Link – For Static Navigation (UI)
+
+You use <Link> when you want the user to click and go to another page.
+
+import { Link } from 'react-router-dom';
+
+function Navbar() {
+  return (
+    <nav>
+      <Link to="/">Home</Link>
+      <Link to="/about">About</Link>
+    </nav>
+  );
+}
+
+It behaves like an <a> tag but without reloading the page.
+
+Keeps it a single-page app.
+
+navigate() – For Programmatic Navigation (JS logic)
+Use this when you want to redirect based on some event or logic.
+
+
+import { useNavigate } from 'react-router-dom';
+
+function Login() {
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    // login logic...
+    navigate('/dashboard'); // Redirect after login
+  };
+
+  return <button onClick={handleLogin}>Log In</button>;
+}
+Super useful in forms, buttons, or after API calls.
+
+Doesn’t need user interaction with a link.
+
+Routes automatically only renders the first match
+
+In React Router v6 and above, the exact prop is no longer needed. The routing behavior is strict by default, meaning that routes only match if the entire path matches the URL.
+
+So in React Router v6, you don’t have to add exact anymore, because it automatically matches exact paths.

@@ -1,0 +1,59 @@
+What is useSelector?
+useSelector lets you extract specific pieces of state from your Redux store and use them in your component.
+
+Think of it like subscribing to just the data you care about — whenever that piece of state changes, your component will re-render.
+
+🔁 Syntax:
+
+const selectedData = useSelector((state) => state.someSlice.someValue);
+
+🧪 Example
+Let's say you have this Redux state:
+
+
+{
+  user: {
+    name: 'Alice',
+    isLoggedIn: true
+  },
+  cart: {
+    items: []
+  }
+}
+Accessing state in a component:
+
+import { useSelector } from 'react-redux';
+
+function WelcomeMessage() {
+  const name = useSelector((state) => state.user.name);
+
+  return <h1>Welcome, {name}!</h1>;
+}
+✅ The component will automatically re-render if state.user.name changes.
+
+📦 More Examples
+Get entire slice:
+
+const user = useSelector((state) => state.user);
+Use with shallow equality (optional):
+By default, useSelector uses strict equality (===) to decide if the selected state changed. For objects/arrays, you can optimize re-renders using shallowEqual:
+
+
+import { shallowEqual, useSelector } from 'react-redux';
+
+const user = useSelector((state) => state.user, shallowEqual);
+⚠️ Common Gotchas
+Avoid selecting the entire store unless you really need it.
+
+The selector function runs on every store update — so keep it efficient.
+
+Don’t mutate the Redux state inside a selector — it's read-only.
+
+🧠 TL;DR
+Hook to read data from Redux state
+
+Keeps components in sync with the store
+
+Works like a “subscription” to part of your state
+
+Replaces mapStateToProps from class-based components

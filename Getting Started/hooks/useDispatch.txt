@@ -1,0 +1,51 @@
+How they work together:
+
+useSelector: Reads state from the Redux store → your UI knows what to display.
+
+useDispatch: Sends actions to the store → your UI tells Redux what happened.
+
+🔁 Real-World Analogy
+Imagine your app is like a smart thermostat:
+
+useSelector is like reading the current temperature.
+
+useDispatch is like changing the temperature setting.
+
+You read what's going on → decide what to do → and trigger a change.
+
+🧪 Practical Example: Counter App
+🧱 Redux State (in the store)
+
+{
+  counter: 0
+}
+🔨 Action Creators
+
+// actions.js
+export const increment = () => ({ type: 'INCREMENT' });
+export const decrement = () => ({ type: 'DECREMENT' });
+🧩 Component using both hooks:
+
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { increment, decrement } from './actions';
+
+function Counter() {
+  const count = useSelector((state) => state.counter); // read state
+  const dispatch = useDispatch(); // get dispatch function
+
+  return (
+    <div>
+      <h2>Count: {count}</h2>
+      <button onClick={() => dispatch(decrement())}>-</button>
+      <button onClick={() => dispatch(increment())}>+</button>
+    </div>
+  );
+}
+✅ What’s happening here?
+
+useSelector grabs the current value of counter from the store.
+
+useDispatch is used to fire actions that update the store.
+
+Redux updates the store → the component re-renders with the new state.

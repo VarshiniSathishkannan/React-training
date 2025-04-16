@@ -1,0 +1,66 @@
+What is useReducer?
+useReducer is a React hook used for managing complex state logic — especially when:
+
+State depends on previous state
+
+There are multiple related state variables
+
+You want a Redux-like structure in a component
+
+It's like useState but on steroids 💪
+
+✅ Syntax
+
+const [state, dispatch] = useReducer(reducerFunction, initialState);
+reducerFunction: A function that determines how state updates based on an action
+
+initialState: The initial value of the state
+
+dispatch: A function used to trigger state updates
+
+🔄 Reducer Function Example
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 };
+    case 'decrement':
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+}
+🔧 Full Example in React:
+
+import React, { useReducer } from 'react';
+
+const initialState = { count: 0 };
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 };
+    case 'decrement':
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+}
+
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    <div>
+      <h2>Count: {state.count}</h2>
+      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
+    </div>
+  );
+}
+🆚 useState vs useReducer
+Feature	useState	useReducer
+Simpler state	✅ Best choice	❌ Overkill
+Complex logic	❌ Gets messy	✅ Cleaner & more manageable
+Multiple related values	❌ Hard to handle	✅ Group into one state object
+Based on previous state	✅ Yes (with care)	✅ Natural with reducer logic

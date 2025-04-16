@@ -1,0 +1,121 @@
+What is React.memo?
+React.memo is a higher-order component (HOC) that memoizes a functional component.
+It helps prevent unnecessary re-renders when the props haven't changed.
+
+📦 Think of it as PureComponent but for functional components.
+
+✅ Syntax:
+
+const MyComponent = React.memo(function MyComponent(props) {
+  // your component code
+});
+Or with arrow function:
+
+
+const MyComponent = React.memo((props) => {
+  // your component code
+});
+🧪 Example:
+
+const Child = React.memo(({ value }) => {
+  console.log('Child rendered');
+  return <div>Value: {value}</div>;
+});
+
+function Parent() {
+  const [count, setCount] = useState(0);
+  const [value, setValue] = useState('Hello');
+
+  return (
+    <>
+      <Child value={value} />
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </>
+  );
+}
+🧠 What happens here?
+When you click "Increment", Parent re-renders.
+
+But Child won't re-render unless value changes — thanks to React.memo!
+
+🔍 Under the hood:
+React.memo(Component) does a shallow comparison of props between renders.
+If the props are the same as last time, React skips re-rendering the component.
+
+⚙️ Optional: Custom Comparison Function
+
+React.memo(Component, (prevProps, nextProps) => {
+  // return true if props are equal
+  // return false to re-render
+});
+You can use this for more complex or deep comparisons.
+
+⚠️ When not to use React.memo
+
+If your component always needs to re-render
+
+If props are changing frequently
+
+If props are non-primitive and change on every render (like new object or array)
+
+✅ When to use it:
+Use Case	Use React.memo?
+Functional component is pure	✅ Yes
+Receives same props often	✅ Yes
+Re-rendering impacts performance	✅ Yes
+Component is small or cheap	❌ Not needed
+🧠 TL;DR
+Feature	Description
+React.memo	Memoizes a functional component
+Avoids re-renders	When props don’t change
+Compares props	Shallow comparison (can customize)
+Similar to	PureComponent, but for function components
+
+The Problem with Functions as Props
+Even if you wrap your component with React.memo, it will still re-render if the props change — even slightly.
+
+When you pass a function as a prop, like this:
+
+
+<Child onClick={() => doSomething()} />
+...a new function is created every render. So even if the logic hasn’t changed, the reference has, and React sees the prop as "different."
+
+🧠 So what happens?
+React.memo does a shallow comparison.
+
+A new function !== old function.
+
+❌ Result: React re-renders the component.
+
+✅ How useCallback Helps
+By using useCallback, you memoize the function, so React sees the same function reference across renders — unless its dependencies change.
+
+🔧 Example:
+
+const handleClick = useCallback(() => {
+  console.log('clicked');
+}, []); // ✅ won't change unless dependencies change
+Now, if you pass handleClick to a memoized child component:
+
+
+<Child onClick={handleClick} />
+React will skip re-rendering if no other props changed — thanks to both:
+
+React.memo for the component
+
+useCallback for the function prop
+
+✅ In Summary
+Concept	What it does
+React.memo	Prevents re-renders if props haven’t changed
+useCallback	Prevents function props from changing unnecessarily
+🧠 TL;DR
+React.memo checks if props changed → avoids re-render.
+
+If you pass a new function every time, that’s always "changed".
+
+useCallback ensures that the function stays the same between renders.
+
+Together, they make a great performance optimization team! 🚀
+
+Let me know if you'd like a small interactive example combining both!

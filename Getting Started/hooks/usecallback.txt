@@ -1,0 +1,71 @@
+What is useCallback?
+useCallback is a React Hook that returns a memoized version of a function — meaning the function will not be re-created on every render, unless its dependencies change.
+
+📌 Why use it?
+Every time a component re-renders, all the functions defined inside it are re-created.
+This can lead to performance issues or unnecessary re-renders of child components — especially when passing functions as props.
+
+✅ Syntax:
+
+const memoizedCallback = useCallback(() => {
+  // some function logic
+}, [dependencies]);
+🧪 Example: Without useCallback
+
+function Parent() {
+  const [count, setCount] = useState(0);
+
+  const handleClick = () => {
+    console.log('Clicked!');
+  };
+
+  return <Child onClick={handleClick} />;
+}
+🔁 Every time Parent re-renders, handleClick is re-created, and that could trigger a re-render in Child, even if nothing else changed.
+
+✅ With useCallback
+
+const handleClick = useCallback(() => {
+  console.log('Clicked!');
+}, []);
+Now handleClick is memoized — it stays the same between renders unless its dependencies change.
+
+🧠 Real-World Use Case: With React.memo
+If you're using React.memo() to memoize child components, and passing them functions as props, you'll want those functions to stay the same unless truly needed. That’s when useCallback shines.
+
+
+const Child = React.memo(({ onClick }) => {
+  console.log('Child render');
+  return <button onClick={onClick}>Click me</button>;
+});
+
+function Parent() {
+  const [count, setCount] = useState(0);
+
+  const handleClick = useCallback(() => {
+    console.log('Clicked!');
+  }, []);
+
+  return (
+    <>
+      <Child onClick={handleClick} />
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </>
+  );
+}
+🎯 Result:
+Child only re-renders when handleClick changes — which is never, unless you change its dependencies.
+
+🔍 useCallback vs useMemo
+Hook	Purpose
+useCallback(fn, deps)	Returns a memoized function
+useMemo(() => fn(), deps)	Returns a memoized value/result
+⚠️ When not to use useCallback
+Don't use it just everywhere blindly — only when:
+
+You're passing functions as props to memoized children
+
+You notice performance issues or unnecessary re-renders
+
+The function is expensive to recreate
+

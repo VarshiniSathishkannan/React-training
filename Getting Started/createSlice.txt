@@ -1,0 +1,53 @@
+createSlice is one of the best features from Redux Toolkit — it makes working with Redux way easier and cleaner.
+
+createSlice is a function from @reduxjs/toolkit that lets you:
+
+Define state
+Define reducers (functions that update state)
+Automatically generate action creators
+All in one place, with less boilerplate
+
+import { createSlice } from '@reduxjs/toolkit';
+
+import { createSlice } from '@reduxjs/toolkit';
+
+const counterSlice = createSlice({
+  name: 'counter',           // Name of the slice
+  initialState: { value: 0 }, // Initial state
+  reducers: {
+    increment: (state) => {
+      state.value += 1;      // ✅ You can mutate state directly (thanks to Immer!)
+    },
+    decrement: (state) => {
+      state.value -= 1;
+    },
+    incrementByAmount: (state, action) => {
+      state.value += action.payload;
+    },
+  },
+});
+
+export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export default counterSlice.reducer;
+
+createSlice returns 
+
+reducer	The reducer function for this slice
+actions	Auto-generated action creators for each reducer you define
+
+You can now use those in components:
+
+import { useDispatch, useSelector } from 'react-redux';
+import { increment } from './counterSlice';
+
+function Counter() {
+  const dispatch = useDispatch();
+  const value = useSelector((state) => state.counter.value);
+
+  return (
+    <div>
+      <h1>{value}</h1>
+      <button onClick={() => dispatch(increment())}>Increment</button>
+    </div>
+  );
+}

@@ -1,0 +1,47 @@
+The useContext hook in React is super powerful for sharing state or values between components — without having to pass props down manually through every level. Think of it like a global variable for React components (but in a clean, React-y way).
+
+// ThemeContext.js
+import React from 'react';
+
+const ThemeContext = React.createContext(); // ✅ create context
+export default ThemeContext;
+
+// App.js
+import React, { useState } from 'react';
+import ThemeContext from './ThemeContext';
+import ThemeButton from './ThemeButton';
+
+function App() {
+  const [theme, setTheme] = useState('light');
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <div className={theme}>
+        <h1>Hello Context!</h1>
+        <ThemeButton />
+      </div>
+    </ThemeContext.Provider>
+  );
+}
+
+export default App;
+
+// ThemeButton.js
+import React, { useContext } from 'react';
+import ThemeContext from './ThemeContext';
+
+function ThemeButton() {
+  const { theme, setTheme } = useContext(ThemeContext); // ✅ useContext here
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+  };
+
+  return (
+    <button onClick={toggleTheme}>
+      Current theme: {theme} (Click to toggle)
+    </button>
+  );
+}
+
+export default ThemeButton;

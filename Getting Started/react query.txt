@@ -1,0 +1,91 @@
+QueryClientProvider is a React context provider that you wrap around your application to give it access to React Query's caching, fetching, and syncing capabilities.
+
+It provides a QueryClient instance to your entire app — this instance manages:
+
+Query caching
+
+Background updates
+
+Automatic retries
+
+Devtools integration
+
+useQuery and useMutation are the core hooks provided by React Query (aka TanStack Query) for handling data fetching and manipulation in your React apps. They make working with APIs and remote data super easy, efficient, and powerful.
+
+🧠 What is useQuery?
+useQuery is a hook used to fetch data from an API or server and keep it in a cached and synchronized state.
+
+npm install @tanstack/react-query
+
+index.js
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import App from './App';
+
+// Create a QueryClient instance
+const queryClient = new QueryClient();
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <QueryClientProvider client={queryClient}>
+    <App />
+  </QueryClientProvider>
+);
+
+Some app
+
+import { useQuery } from '@tanstack/react-query';
+
+function User() {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['user'],
+    queryFn: () =>
+      fetch('https://api.example.com/user').then((res) => res.json()),
+  });
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error fetching user data</p>;
+
+  return <div>Hello, {data.name}!</div>;
+}
+
+🧠 What is useMutation?
+useMutation is used when you're modifying data — like creating, updating, or deleting — as opposed to just fetching it.
+
+import { useMutation } from '@tanstack/react-query';
+
+function AddUser() {
+  const { mutate, isLoading, isSuccess } = useMutation({
+    mutationFn: (newUser) =>
+      fetch('/api/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newUser),
+      }),
+  });
+
+  const handleAddUser = () => {
+    mutate({ name: 'John Doe', email: 'john@example.com' });
+  };
+
+  return (
+    <div>
+      <button onClick={handleAddUser}>Add User</button>
+      {isLoading && <p>Saving user...</p>}
+      {isSuccess && <p>User added successfully!</p>}
+    </div>
+  );
+}
+
+Bonus: Mutations + Query Invalidation
+You can invalidate a query after a mutation to refetch fresh data:
+
+const queryClient = useQueryClient();
+
+const mutation = useMutation({
+  mutationFn: createUser,
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ['users'] });
+  },
+});

@@ -1,0 +1,66 @@
+Great! Let's talk about PropTypes — a built-in way in React to type-check props in components. It's super helpful when you're not using TypeScript, but still want some runtime validation for the props your components receive.
+
+PropTypes is a utility from the prop-types package that lets you define expected types for your component props.
+
+React will then warn you in the console (during development) if a component receives the wrong type of prop, or is missing a required prop.
+
+npm install prop-types
+
+import React from 'react';
+import PropTypes from 'prop-types';
+
+function Greeting({ name, age }) {
+  return (
+    <h1>Hello {name}, you are {age} years old!</h1>
+  );
+}
+
+// Define expected types for props
+Greeting.propTypes = {
+  name: PropTypes.string.isRequired,  // must be a string and required
+  age: PropTypes.number               // optional, but must be a number if passed
+};
+
+export default Greeting;
+
+
+Validator	Description
+PropTypes.string	Must be a string
+PropTypes.number	Must be a number
+PropTypes.bool	Must be a boolean
+PropTypes.array	Must be an array
+PropTypes.object	Must be an object
+PropTypes.func	Must be a function
+PropTypes.node	Anything that can be rendered (string, element, fragment, etc.)
+PropTypes.element	A React element
+PropTypes.any	Any data type
+
+ther Useful Helpers
+✅ .isRequired
+Make a prop required:
+
+
+name: PropTypes.string.isRequired
+✅ oneOf
+Only allow specific values:
+
+
+status: PropTypes.oneOf(['active', 'inactive'])
+✅ arrayOf
+Array with specific type:
+
+
+scores: PropTypes.arrayOf(PropTypes.number)
+✅ shape
+An object with a specific structure:
+
+
+user: PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string
+})
+✅ oneOfType
+Allow multiple types:
+
+
+age: PropTypes.oneOfType([PropTypes.string, PropTypes.number])

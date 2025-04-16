@@ -96,3 +96,15 @@ It’s not imported or referenced anywhere in your code.
 It’s outside the src or public folders, or inside src but not involved in any logic.
 
 The files inside are .txt, .md, or other static formats not interpreted by React/Webpack.
+
+NPM:
+
+Node Package Manager - Manage all the dependencies of the react project including the react library itself
+
+Public folder:
+
+contains static assets that are served directly to the user's browser, such as images, fonts and index.html
+
+src folder:
+
+contains all the source code of the application which is then responsible for the dynamic changes in the web application 

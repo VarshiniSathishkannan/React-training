@@ -1,0 +1,18 @@
+What is React.StrictMode?
+<React.StrictMode> is a wrapper component provided by React. You use it to wrap part or all of your React app to:
+
+Highlight potential issues
+
+Warn about deprecated APIs
+
+Enforce best practices
+
+It runs additional checks to help you catch bugs before they cause problems in production.
+
+What it does?
+
+1. Double Invokes Certain Lifecycle Methods (in dev only)
+2. Warns About Deprecated Methods
+3. Warns About Unsafe Side Effects
+4. Checks for Legacy Context API
+

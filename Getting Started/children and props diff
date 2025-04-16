@@ -1,0 +1,60 @@
+In React:
+
+Props are named inputs you pass to a component.
+
+Children is a special prop that automatically includes any JSX nested inside a component’s opening and closing tags.
+
+What Are Props?
+Props are like arguments to functions. You pass them into components using attributes.
+
+function Card({ title, subtitle }) {
+  return (
+    <div>
+      <h2>{title}</h2>
+      <p>{subtitle}</p>
+    </div>
+  );
+}
+
+// Usage
+<Card title="Hello" subtitle="Welcome to React!" />
+
+What is children?
+children is a special prop that React gives you automatically. It contains whatever JSX is nested inside the component.
+
+function Card({ children }) {
+  return (
+    <div className="card">
+      {children}
+    </div>
+  );
+}
+
+// Usage
+<Card>
+  <h2>Hello</h2>
+  <p>This is nested inside the card</p>
+</Card>
+
+✅ Everything between <Card>...</Card> becomes the children prop.
+
+How you pass it	As attributes (prop=value)	As nested content inside tags
+Accessed via	props.name	props.children
+Customizable names?	✅ Yes	🚫 No (always called children)
+Used for	Static data, functions, options	Nesting layout/content
+
+2. Function as Children (a.k.a. render props)
+This is more advanced and powerful. You pass a function as children, and the component calls that function with data.
+
+Example:
+
+<MyComponent>
+  {(data) => <p>Data is: {data}</p>}
+</MyComponent>
+Inside MyComponent:
+
+
+function MyComponent({ children }) {
+  const someData = "React is fun!";
+  return <div>{children(someData)}</div>;
+}

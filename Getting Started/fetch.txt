@@ -1,0 +1,19 @@
+⚔️ fetch vs axios
+Feature	fetch() (Built-in)	axios (Library)
+✅ Availability	Native in modern browsers (no install)	Requires installation (npm install axios)
+🔧 Default JSON parsing	❌ Manual (response.json())	✅ Automatic (response.data)
+❌ Error handling	Only rejects on network error	Rejects on non-2xx HTTP status
+🔄 Request cancellation	❌ Not easy (needs AbortController)	✅ Easy with built-in CancelToken
+🧾 Interceptors	❌ Not available	✅ Yes, for logging, auth, etc.
+📎 Upload progress	❌ Not directly supported	✅ Supports upload/download progress
+🌐 Browser support	Modern browsers	All browsers (via polyfills if needed)
+🧼 Code simplicity	More boilerplate	Cleaner and more readable syntax
+📦 Payload handling	Need to set headers and body manually	Handles it smartly
+
+fetch('https://jsonplaceholder.typicode.com/users')
+  .then(res => {
+    if (!res.ok) throw new Error('Request failed');
+    return res.json();
+  })
+  .then(data => console.log(data))
+  .catch(err => console.error(err));

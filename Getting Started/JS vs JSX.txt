@@ -1,66 +1,61 @@
-React app using JS
-// ES6 ECMA Script version 6 -- official name of js -- ES2015
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-</head>
-<body>
-    <h1> Welcome to Walmart </h1>
-    <div id="root"></div>
-    <script>
-        var domcontainer = document.getElementById("root");
-        var root = ReactDOM.createRoot(domcontainer);
-        // createelement takes 3 arguments - what type of element, attributes and children
-        var h1elem = React.createElement("h1",null,"welcome");
-        var linkelem = React.createElement("a",{href:"https://www.walmart.com/"},"Go to link");
-        root.render(h1elem);
-        root.render(linkelem); 
-        // render will only pickup the frst argument it will ignore the rest of the elements
-        // render will create a virtual DOM, it will follow a tree structure. it can have only one root
-        var division = React.createElement("div",null,[h1elem,linkelem]);
-        root.render(division);
-    </script>
-</body>
-</html>
-
-React app using JSX
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-</head>
-<body>
-    <h1> Welcome to Walmart </h1>
-    <div id="root"></div>
-    <script type="text/babel">
-        var domcontainer = document.getElementById("root");
-        var root = ReactDOM.createRoot(domcontainer);
-        // JSX javascript exentisibility -- using HTML in JS 
-        var h1elem = <h1> Hello </h1>; // if closing tag is not proper it will throw an error
-        var anchroekem = <a href="https://www.walmart.com/">Go to link</a>
-        var division = <div> <h1> Hello </h1>
-            <a href="https://www.walmart.com/">Go to link</a>
-            </div>
-        var division = <div> {h1ele} </div>
-        root.render(division);
-    </script>
-</body>
-</html>
+JSX stands for javascript xml
+it is used by react to writed HTML like code
+JSX will be converted to JS via tools like babel because browsers can understand only JS
+We can use the same .js extension, can also use .jsx for clarity in some cases
 
 <!-- requires a transalator to translate from JSX to JS and a compiler (list the syntax error in the file) which will be taken care by Babel 
 Babel is also known as transpiler -->
+
+transpiler is a tool which converts source code from one high level programming lanuage to another high level programming language
+
+A compiler is a tool which converts from a high level programming language into a lower level language(machine code)
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+const App = () => {
+  const message = "Hello, React!";
+  return <h1>{message}</h1>;
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+
+🔍 Here, <h1>{message}</h1> looks like HTML — but it's JSX.
+It's easier to read and maintain.
+
+🧠 Same Thing Without JSX (Plain JS)
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+const App = () => {
+  const message = "Hello, React!";
+  return React.createElement('h1', null, message);
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(React.createElement(App));
+😵 Instead of <h1>{message}</h1>, we write:
+
+
+React.createElement('h1', null, message)
+And instead of:
+
+
+<App />
+We write:
+
+
+React.createElement(App)
+🧠 JSX is just syntactic sugar for React.createElement(...)
+It makes writing components:
+
+Cleaner 🧼
+
+More HTML-like 🧱
+
+Easier to visualize the DOM 🧠
+
+
+

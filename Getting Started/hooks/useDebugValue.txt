@@ -1,0 +1,55 @@
+🐛 What is useDebugValue?
+useDebugValue lets you display a custom label/value in React DevTools for a custom hook.
+
+🧠 Syntax:
+
+useDebugValue(value);
+or, with a formatting function:
+
+
+useDebugValue(value, value => /* some formatted output */);
+🎯 When to use it?
+Only in custom hooks.
+
+When you want to make the hook’s state easier to inspect in DevTools.
+
+Not needed in most apps — it's just for developer experience.
+
+🔧 Simple Example
+
+import { useState, useDebugValue, useEffect } from 'react';
+
+function useOnlineStatus() {
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    const updateStatus = () => setIsOnline(navigator.onLine);
+
+    window.addEventListener('online', updateStatus);
+    window.addEventListener('offline', updateStatus);
+
+    return () => {
+      window.removeEventListener('online', updateStatus);
+      window.removeEventListener('offline', updateStatus);
+    };
+  }, []);
+
+  useDebugValue(isOnline ? 'Online' : 'Offline');
+
+  return isOnline;
+}
+👆 In React DevTools, this would show something like:
+
+
+useOnlineStatus: "Online"
+⚙️ With Formatter Function
+
+useDebugValue(user, user => user?.name || 'No user');
+This helps you avoid expensive computations unless DevTools is open.
+
+🛠️ TL;DR
+Purpose: Add debug labels to custom hooks for DevTools.
+
+When: Inside custom hooks only.
+
+Why: Better dev experience, easier debugging.

@@ -1,0 +1,57 @@
+🧠 What is useLayoutEffect?
+useLayoutEffect is just like useEffect, but it fires synchronously after all DOM mutations and before the browser paints the screen.
+
+🔁 Syntax:
+jsx
+Copy
+Edit
+useLayoutEffect(() => {
+  // run some code
+  return () => {
+    // optional cleanup
+  };
+}, [dependencies]);
+📊 useEffect vs useLayoutEffect
+
+Feature	useEffect	useLayoutEffect
+Timing	After paint	Before paint
+Blocking paint?	❌ No	✅ Yes
+Use case	Data fetching, subscriptions	Measuring layout, DOM updates
+🚀 When to use useLayoutEffect
+Use it when you need to:
+
+Read layout (e.g., measure element size/position)
+
+Make DOM changes that must happen before paint
+
+Avoid visual flickers during reflow/repaint
+
+🔧 Example: Measuring DOM element size
+jsx
+Copy
+Edit
+import React, { useLayoutEffect, useRef, useState } from 'react';
+
+function Box() {
+  const boxRef = useRef();
+  const [width, setWidth] = useState(0);
+
+  useLayoutEffect(() => {
+    const rect = boxRef.current.getBoundingClientRect();
+    setWidth(rect.width);
+  }, []);
+
+  return (
+    <div>
+      <div ref={boxRef} style={{ width: '50%' }}>Resizable Box</div>
+      <p>Width: {width}px</p>
+    </div>
+  );
+}
+📝 If you used useEffect here instead, the width would be updated after paint, which could cause a visible flicker.
+
+⚠️ Important Notes
+useLayoutEffect blocks painting, so overusing it can hurt performance.
+
+Only use it when you absolutely need to measure or modify the DOM before the screen updates.
+

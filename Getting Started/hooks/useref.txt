@@ -1,0 +1,68 @@
+What is useRef?
+useRef is a React Hook that returns a mutable object (.current) that persists across renders.
+
+It’s often used for:
+
+Accessing DOM elements (like grabbing input fields, divs, etc.)
+Storing mutable values that don’t trigger re-renders when changed.
+
+✅ Syntax:
+
+const myRef = useRef(initialValue);
+myRef.current will hold the value.
+
+The .current property is mutable.
+
+Unlike state (useState), updating .current won’t cause a re-render.
+
+🧪 Example 1: Accessing DOM elements
+
+import React, { useRef, useEffect } from 'react';
+
+function FocusInput() {
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current.focus(); // Automatically focuses the input on mount
+  }, []);
+
+  return <input ref={inputRef} type="text" />;
+}
+
+🎯 Here:
+inputRef stores a reference to the DOM node (<input>).
+
+You can now programmatically control it (focus, scroll, etc.).
+
+There is no attribute ref in normal html, it is only available in react to work the DOM elements directly 
+
+🧪 Example 2: Storing mutable values
+
+function Timer() {
+  const count = useRef(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      count.current += 1;
+      console.log('Count:', count.current); // Logs without re-render
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return <p>Open the console to see the count</p>;
+}
+
+🔥 What’s special?
+count keeps changing, but the component never re-renders.
+
+This is great for timers, tracking previous values, etc.
+
+💬 When to Use useRef vs useState
+Use Case	Hook to Use
+Track a DOM element	✅ useRef
+Mutable value, no re-render	✅ useRef
+Value changes should trigger UI update	✅ useState
+
+https://react.dev/learn/referencing-values-with-refs
+https://react.dev/learn/manipulating-the-dom-with-refs

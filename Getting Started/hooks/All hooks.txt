@@ -1,0 +1,40 @@
+Core React Hooks
+
+useState	Manage local state in functional components
+useEffect	Handle side effects (data fetching, timers, subscriptions, etc.)
+useContext	Access context values (avoids prop drilling)
+
+Performance Hooks
+
+useMemo	    Memoize a computed value to avoid expensive re-calculations
+useCallback	Memoize a function to prevent unnecessary re-creations
+
+Reference & DOM Hooks
+
+useRef	Create a mutable reference (often used to access DOM nodes or store values across renders)
+
+Advanced State Management
+
+useReducer	Alternative to useState for complex state logic (similar to Redux reducer pattern)
+
+Hooks for Building Custom Hooks
+
+useImperativeHandle	Customize the instance value that is exposed when using ref with forwardRef()
+useLayoutEffect	Like useEffect, but runs synchronously after DOM updates
+useDebugValue	Custom label/value shown in React DevTools for custom hooks
+
+Bonus: React Router & Other Library Hooks (Not Built-In)
+These come from libraries like react-router, react-redux, etc.
+
+useNavigate, useParams	    react-router	Routing, navigation, accessing route params
+useSelector, useDispatch	react-redux	    State management with Redux
+useForm, useField	        react-hook-form	Form handling
+
+
+Category	    Hooks
+State	        useState, useReducer
+Lifecycle	    useEffect, useLayoutEffect
+Context	        useContext
+Performance	    useMemo, useCallback
+Refs	        useRef, useImperativeHandle
+Debugging	    useDebugValue

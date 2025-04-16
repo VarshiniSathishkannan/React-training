@@ -1,0 +1,65 @@
+What are Styled Components?
+Styled Components is a CSS-in-JS library for React (and React Native) that lets you write actual CSS code inside your JavaScript files.
+
+You use tagged template literals to create styled React components — each component has its own unique className, so styles don’t leak.
+
+npm install styled-components
+
+import styled from 'styled-components';
+
+const StyledButton = styled.button`
+  background-color: #007bff;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
+function App() {
+  return <StyledButton>Click Me</StyledButton>;
+}
+
+export default App;
+
+What’s happening here?
+
+You created a React component (StyledButton) that renders a <button> with your styles.
+On hover, the background color changes.
+Styles are scoped to this button — no global conflicts.
+
+Dynamic Styles with Props
+You can pass props into styled components to make them dynamic:
+
+const Box = styled.div`
+  width: ${(props) => props.size || '100px'};
+  height: ${(props) => props.size || '100px'};
+  background-color: ${(props) => props.bg || 'tomato'};
+`;
+
+function App() {
+  return (
+    <Box size="150px" bg="skyblue" />
+  );
+}
+
+import { ThemeProvider } from 'styled-components';
+
+const theme = {
+  colors: {
+    primary: '#007bff',
+    secondary: '#6c757d',
+  },
+};
+
+<ThemeProvider theme={theme}>
+  <App />
+</ThemeProvider>
+
+const Title = styled.h1`
+  color: ${(props) => props.theme.colors.primary};
+`;

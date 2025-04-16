@@ -1,0 +1,9 @@
+When a user requests a webpage, 
+
+Index.html -> single page application - id = root will be replaced by the index.js file
+
+index.js -> Enty point (JS)
+
+App.js -> Root component, container for other components, it defines the structure, layout and routing in the application 
+
+compA.js compb.js ..... (Other components)
